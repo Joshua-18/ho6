@@ -165,7 +165,7 @@ insert into bb_shopper
             'VA','23321', '7574216559', NULL, 'MargS@infi.net', 'MaryS',
             'pupper', 1, '03-FEB-2012', NULL, 'USA');
 insert into bb_shopper
-    values (23, 'Kenny', 'Ratmans, '1 Fun Lane', 'South Park',
+    values (23, 'Kenny', 'Ratmans', '1 Fun Lane', 'South Park',
             'NC','54674', '9015680902', NULL, 'ratboy@msn.net', 'rat55',
             'kile', 0, '26-JAN-2012', NULL, 'USA');
 insert into bb_shopper
