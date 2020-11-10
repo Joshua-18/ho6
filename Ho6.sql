@@ -53,3 +53,22 @@ SELECT num_purch_sf(idshopper)
 FROM bb_shopper
 WHERE idshopper = 23;
 /
+-- # 6-4
+CREATE OR REPLACE FUNCTION DAY_ORD_SF 
+(p_date  DATE)
+RETURN VARCHAR2 
+AS
+lv_date VARCHAR2(10);
+BEGIN
+lv_date := TO_CHAR(p_date, 'DAY');
+  RETURN lv_date;
+END DAY_ORD_SF;
+/
+SELECT idBasket, day_ord_sf(dtcreated)
+  FROM bb_basket;
+/
+SELECT day_ord_sf(dtcreated), COUNT(idBasket)
+  FROM bb_basket
+  GROUP BY day_ord_sf(dtcreated);
+/
+-- # 6-5
