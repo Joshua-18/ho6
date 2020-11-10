@@ -135,7 +135,7 @@ BEGIN
     WHEN p_st_id = 5 THEN
         lv_stage := 'Shipped';
     ELSE
-        DBMS_OUTPUT.PUT_LINE('ID NOT FOUND, PLEASE CHOOSE 1-5');
+        DBMS_OUTPUT.PUT_LINE('PLEASE CHOOSE 1-5');
   END CASE;
 RETURN lv_stage;
 END STATUS_DESC_SF;
