@@ -116,6 +116,14 @@ BEGIN
   DBMS_OUTPUT.PUT_LINE('Basket ' || lv_num_id || ' is ' || lv_flag);
 END;
 /
+DECLARE
+  lv_flag VARCHAR2(12);
+  lv_num_id bb_basket.idbasket%TYPE := 4;
+BEGIN
+  lv_flag := ord_ship_sf(lv_num_id);
+  DBMS_OUTPUT.PUT_LINE('Basket ' || lv_num_id || ' is ' || lv_flag);
+END;
+/
 -- # 6-6
 CREATE OR REPLACE FUNCTION STATUS_DESC_SF 
 (p_st_id NUMBER)
@@ -144,3 +152,4 @@ SELECT dtstage, status_desc_sf(idstage)
 FROM bb_basketstatus
 WHERE idbasket = 4;
 /
+-- # 6-7
