@@ -323,4 +323,58 @@ TAX_CALC_SF(IDBASKET)
                  6.75
 
 SQL> /
+SQL> -- # 6-8
+SQL> CREATE OR REPLACE FUNCTION CK_SALE_SF 
+  2  (p_proid IN NUMBER,
+  3   p_date  IN DATE)
+  4  RETURN VARCHAR2 
+  5  AS 
+  6    lv_start DATE;
+  7    lv_end DATE;
+  8    lv_str_val VARCHAR2(15);
+  9  BEGIN
+ 10      SELECT salestart, saleend
+ 11      INTO lv_start, lv_end
+ 12      FROM bb_product
+ 13      WHERE idproduct = p_proid;
+ 14     IF p_date BETWEEN lv_start AND lv_end THEN
+ 15      lv_str_val := 'On Sale!';
+ 16    ELSE
+ 17      lv_str_val := 'Great Deal!';
+ 18    END IF; 
+ 19    RETURN lv_str_val;
+ 20  END CK_SALE_SF;
+ 21  /
+
+Function CK_SALE_SF compiled
+
+SQL> DECLARE
+  2    lv_str_val VARCHAR2(15);
+  3  BEGIN
+  4    lv_str_val := ck_sale_sf(6,'10-JUN-12');
+  5    DBMS_OUTPUT.PUT_LINE(lv_str_val);
+  6  END;
+  7  /
+On Sale!
+
+
+PL/SQL procedure successfully completed.
+
+SQL> DECLARE
+  2    lv_str_val VARCHAR2(15);
+  3  BEGIN
+  4    lv_str_val := ck_sale_sf(6,'19-JUN-12');
+  5    DBMS_OUTPUT.PUT_LINE(lv_str_val);
+  6  END;
+  7  /
+Great Deal!
+
+
+PL/SQL procedure successfully completed.
+
+SQL> --CLEAR COLUMNS
+SQL> --CLEAR BRAKES
+SQL> --TTITLE OFF
+SQL> --TTITLE CENTER 'HO6-JOSHUA MEMBRENO'
+SQL> --COLUMN IDPRODUCT HEADING 'ID|PROD' FORMAT A5 WRAP
 SQL> spool off

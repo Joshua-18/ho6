@@ -175,3 +175,44 @@ SELECT tax_calc_sf(idbasket)
   FROM bb_basket
   WHERE idbasket = 6;
 /
+-- # 6-8
+CREATE OR REPLACE FUNCTION CK_SALE_SF 
+(p_proid IN NUMBER,
+ p_date  IN DATE)
+RETURN VARCHAR2 
+AS 
+  lv_start DATE;
+  lv_end DATE;
+  lv_str_val VARCHAR2(15);
+BEGIN
+    SELECT salestart, saleend
+    INTO lv_start, lv_end
+    FROM bb_product
+    WHERE idproduct = p_proid;
+   IF p_date BETWEEN lv_start AND lv_end THEN
+    lv_str_val := 'On Sale!';
+  ELSE
+    lv_str_val := 'Great Deal!';
+  END IF; 
+  RETURN lv_str_val;
+END CK_SALE_SF;
+/
+DECLARE
+  lv_str_val VARCHAR2(15);
+BEGIN
+  lv_str_val := ck_sale_sf(6,'10-JUN-12');
+  DBMS_OUTPUT.PUT_LINE(lv_str_val);
+END;
+/
+DECLARE
+  lv_str_val VARCHAR2(15);
+BEGIN
+  lv_str_val := ck_sale_sf(6,'19-JUN-12');
+  DBMS_OUTPUT.PUT_LINE(lv_str_val);
+END;
+/
+--CLEAR COLUMNS
+--CLEAR BRAKES
+--TTITLE OFF
+--TTITLE CENTER 'HO6-JOSHUA MEMBRENO'
+--COLUMN IDPRODUCT HEADING 'ID|PROD' FORMAT A5 WRAP
