@@ -116,3 +116,31 @@ BEGIN
   DBMS_OUTPUT.PUT_LINE('Basket ' || lv_num_id || ' is ' || lv_flag);
 END;
 /
+-- # 6-6
+CREATE OR REPLACE FUNCTION STATUS_DESC_SF 
+(p_st_id NUMBER)
+RETURN VARCHAR2 
+AS
+lv_stage    VARCHAR2(25);
+BEGIN
+  CASE 
+    WHEN p_st_id = 1 THEN
+        lv_stage := 'Order submitted';
+    WHEN p_st_id = 2 THEN
+        lv_stage := 'Accepted, Sent to shipping';
+    WHEN p_st_id = 3 THEN
+        lv_stage := 'Back Ordered';
+    WHEN p_st_id = 4 THEN
+        lv_stage := 'Cancelled';
+    WHEN p_st_id = 5 THEN
+        lv_stage := 'Shipped';
+    ELSE
+        DBMS_OUTPUT.PUT_LINE('ID NOT FOUND, PLEASE CHOOSE 1-5');
+  END CASE;
+RETURN lv_stage;
+END STATUS_DESC_SF;
+/
+SELECT dtstage, status_desc_sf(idstage)
+FROM bb_basketstatus
+WHERE idbasket = 4;
+/
