@@ -46,6 +46,7 @@ Function TOT_PURCH_SF compiled
 SQL> SELECT idshopper, TOT_PURCH_SF(idshopper)
   2  FROM bb_shopper;
 
+                                       HO6-JOSHUA MEMBRENO                                        
  IDSHOPPER TOT_PURCH_SF(IDSHOPPER)
 ---------- -----------------------
         21                   66.76
@@ -81,6 +82,7 @@ SQL> SELECT num_purch_sf(idshopper)
   2  FROM bb_shopper
   3  WHERE idshopper = 23;
 
+                                       HO6-JOSHUA MEMBRENO                                        
 NUM_PURCH_SF(IDSHOPPER)
 -----------------------
                       3
@@ -103,52 +105,24 @@ Function DAY_ORD_SF compiled
 SQL> SELECT idBasket, day_ord_sf(dtcreated)
   2    FROM bb_basket;
 
-  IDBASKET
-----------
-DAY_ORD_SF(DTCREATED)                                                                               
-----------------------------------------------------------------------------------------------------
-         3 
-MONDAY                                                                                              
-
-         4 
-SUNDAY                                                                                              
-
-         5 
-SUNDAY                                                                                              
-
-         6 
-THURSDAY                                                                                            
-
-         7 
-THURSDAY                                                                                            
-
-         8 
-THURSDAY                                                                                            
-
-         9 
-FRIDAY                                                                                              
-
-        10 
-TUESDAY                                                                                             
-
-        11 
-MONDAY                                                                                              
-
-        12 
-SUNDAY                                                                                              
-
-        13 
-THURSDAY                                                                                            
-
-        14 
-FRIDAY                                                                                              
-
-        15 
-TUESDAY                                                                                             
-
-        16 
-FRIDAY                                                                                              
-
+                                       HO6-JOSHUA MEMBRENO                                        
+   ID           
+ BASK DAY       
+----- ----------
+    3 MONDAY    
+    4 SUNDAY    
+    5 SUNDAY    
+    6 THURSDAY  
+    7 THURSDAY  
+    8 THURSDAY  
+    9 FRIDAY    
+   10 TUESDAY   
+   11 MONDAY    
+   12 SUNDAY    
+   13 THURSDAY  
+   14 FRIDAY    
+   15 TUESDAY   
+   16 FRIDAY    
 
 14 rows selected. 
 
@@ -157,25 +131,14 @@ SQL> SELECT day_ord_sf(dtcreated), COUNT(idBasket)
   2    FROM bb_basket
   3    GROUP BY day_ord_sf(dtcreated);
 
-DAY_ORD_SF(DTCREATED)
-----------------------------------------------------------------------------------------------------
-COUNT(IDBASKET)
----------------
-THURSDAY                                                                                            
-              4
-
-TUESDAY                                                                                             
-              2
-
-SUNDAY                                                                                              
-              3
-
-MONDAY                                                                                              
-              2
-
-FRIDAY                                                                                              
-              3
-
+                                       HO6-JOSHUA MEMBRENO                                        
+DAY        COUNT(IDBASKET)
+---------- ---------------
+THURSDAY                 4
+TUESDAY                  2
+SUNDAY                   3
+MONDAY                   2
+FRIDAY                   3
 
 SQL> /
 SQL> -- # 6-5
@@ -280,16 +243,13 @@ SQL> SELECT dtstage, status_desc_sf(idstage)
   2  FROM bb_basketstatus
   3  WHERE idbasket = 4;
 
-DTSTAGE
----------
-STATUS_DESC_SF(IDSTAGE)                                                                             
-----------------------------------------------------------------------------------------------------
-13-FEB-12 
-Order submitted                                                                                     
+                                       HO6-JOSHUA MEMBRENO                                        
+DTSTAGE    STATUS    
+---------- ----------
+13-FEB-12  Order subm
+           itted     
 
-13-FEB-12 
-Shipped                                                                                             
-
+13-FEB-12  Shipped   
 
 SQL> /
 SQL> -- # 6-7
@@ -318,6 +278,7 @@ SQL> SELECT tax_calc_sf(idbasket)
   2    FROM bb_basket
   3    WHERE idbasket = 6;
 
+                                       HO6-JOSHUA MEMBRENO                                        
 TAX_CALC_SF(IDBASKET)
 ---------------------
                  6.75
@@ -372,9 +333,12 @@ Great Deal!
 
 PL/SQL procedure successfully completed.
 
-SQL> --CLEAR COLUMNS
+SQL> CLEAR COLUMNS
 SQL> --CLEAR BRAKES
-SQL> --TTITLE OFF
-SQL> --TTITLE CENTER 'HO6-JOSHUA MEMBRENO'
-SQL> --COLUMN IDPRODUCT HEADING 'ID|PROD' FORMAT A5 WRAP
+SQL> TTITLE OFF
+SQL> TTITLE CENTER 'HO6-JOSHUA MEMBRENO'
+SQL> COLUMN IDBASKET HEADING 'ID|BASK' FORMAT A5 WRAP
+SQL> COLUMN DAY_ORD_SF(DTCREATED) HEADING 'DAY' FORMAT A10 WRAP
+SQL> COLUMN DTSTAGE HEADING 'DTSTAGE' FORMAT A10 
+SQL> COLUMN STATUS_DESC_SF(IDSTAGE) HEADING 'STATUS' FORMAT A10 
 SQL> spool off
