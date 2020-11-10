@@ -153,3 +153,25 @@ FROM bb_basketstatus
 WHERE idbasket = 4;
 /
 -- # 6-7
+CREATE OR REPLACE FUNCTION TAX_CALC_SF 
+(p_bid  NUMBER)
+RETURN NUMBER
+AS 
+lv_tax  NUMBER(5,2) := 0;
+BEGIN
+    SELECT sb.subtotal*bt.taxrate tax
+    INTO lv_tax
+    FROM bb_basket sb, bb_tax bt
+    WHERE sb.shipstate = bt.state
+        AND sb.idbasket = p_bid;
+  RETURN lv_tax;
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        lv_tax := 0;
+    RETURN lv_tax;
+END TAX_CALC_SF;
+/
+SELECT tax_calc_sf(idbasket)
+  FROM bb_basket
+  WHERE idbasket = 6;
+/
