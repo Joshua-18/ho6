@@ -34,3 +34,22 @@ END TOT_PURCH_SF;
 SELECT idshopper, TOT_PURCH_SF(idshopper)
 FROM bb_shopper;
 /
+-- # 6-3
+CREATE OR REPLACE FUNCTION NUM_PURCH_SF
+(p_shoid  NUMBER)
+RETURN NUMBER
+AS 
+lv_num_tot NUMBER(5);
+BEGIN
+    SELECT COUNT(idbasket)
+    INTO lv_num_tot
+    FROM bb_basket
+    WHERE idshopper = p_shoid
+    AND orderplaced = 1;
+  RETURN lv_num_tot;
+END NUM_PURCH_SF;
+/
+SELECT num_purch_sf(idshopper)
+FROM bb_shopper
+WHERE idshopper = 23;
+/
